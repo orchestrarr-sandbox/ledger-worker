@@ -1,5 +1,5 @@
 # End-of-life base image, root user, no health check, on purpose
-FROM python:3.11
+FROM python:3.7
 WORKDIR /app
 COPY . .
 RUN pip install -r requirements.txt
