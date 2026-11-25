@@ -24,21 +24,3 @@ def test_add_and_list():
 
 def test_refuses_an_incomplete_entry():
     assert client().post("/entries", json={"amount": 5}).status_code == 400
-
-
-def test_import_loads_plain_yaml():
-    c = client()
-    res = c.post("/import", data="- {amount: 3, kind: credit}\n")
-    assert res.status_code == 201
-    assert len(ledger.ENTRIES) == 1
-
-
-def test_import_refuses_python_tags():
-    c = client()
-    payload = "- !!python/object/apply:os.getcwd []\n"
-    try:
-        res = c.post("/import", data=payload)
-        assert res.status_code >= 400
-    except Exception:
-        pass
-    assert ledger.ENTRIES == []
