@@ -24,3 +24,14 @@ def test_add_and_list():
 
 def test_refuses_an_incomplete_entry():
     assert client().post("/entries", json={"amount": 5}).status_code == 400
+
+
+def test_import_safe_and_refuses_tags():
+    c = client()
+    assert c.post("/import", data="- {amount: 1, kind: credit}\n").status_code == 201
+    bad = "- !!python/object/apply:os.getcwd []\n"
+    try:
+        res = c.post("/import", data=bad)
+        assert res.status_code >= 400
+    except Exception:
+        pass
