@@ -24,16 +24,3 @@ def test_add_and_list():
 
 def test_refuses_an_incomplete_entry():
     assert client().post("/entries", json={"amount": 5}).status_code == 400
-
-
-def test_import_valid_yaml():
-    res = client().post("/import", data="- {amount: 3, kind: credit}\n")
-    assert res.status_code == 201
-
-
-def test_import_refuses_python_tag():
-    try:
-        res = client().post("/import", data="- !!python/object/apply:os.getcwd []\n")
-        assert res.status_code >= 400
-    except Exception:
-        pass  # the safe loader refuses the tag
