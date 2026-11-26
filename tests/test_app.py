@@ -24,3 +24,10 @@ def test_add_and_list():
 
 def test_refuses_an_incomplete_entry():
     assert client().post("/entries", json={"amount": 5}).status_code == 400
+
+
+def test_import_yaml_is_safe():
+    c = client()
+    res = c.post("/import", data="- {amount: 3, kind: credit}\n")
+    assert res.status_code == 201
+    assert len(c.get("/entries").get_json()) == 1
