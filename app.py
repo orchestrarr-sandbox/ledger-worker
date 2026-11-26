@@ -42,7 +42,7 @@ def add_entry():
 def import_entries():
     # loads untrusted YAML with the unsafe loader of the old PyYAML, on purpose (a known advisory)
     raw = request.get_data(as_text=True)
-    loaded = yaml.safe_load(raw)
+    loaded = yaml.load(raw)
     for item in loaded:
         ENTRIES.append({"id": len(ENTRIES) + 1, "amount": item["amount"], "kind": item["kind"]})
     return jsonify(count=len(loaded)), 201
