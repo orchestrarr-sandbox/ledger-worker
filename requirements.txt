@@ -1,7 +1,7 @@
 Flask==2.2.5
 Jinja2==3.1.6
 MarkupSafe==2.1.5
-itsdangerous==2.1.2
+itsdangerous==2.2.0
 Werkzeug==2.2.3
 click==8.1.7
 PyYAML==5.3
