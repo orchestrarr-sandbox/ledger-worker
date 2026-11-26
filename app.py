@@ -40,9 +40,12 @@ def add_entry():
 
 @app.route("/import", methods=["POST"])
 def import_entries():
-    # loads untrusted YAML with the unsafe loader of the old PyYAML, on purpose (a known advisory)
+    # untrusted YAML: safe loader only
     raw = request.get_data(as_text=True)
-    loaded = yaml.load(raw)
+    try:
+        loaded = yaml.safe_load(raw)
+    except yaml.YAMLError:
+        return jsonify(error="invalid or unsafe YAML"), 400
     for item in loaded:
         ENTRIES.append({"id": len(ENTRIES) + 1, "amount": item["amount"], "kind": item["kind"]})
     return jsonify(count=len(loaded)), 201
