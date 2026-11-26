@@ -2,12 +2,6 @@ import json
 import os
 import time
 import yaml
-import markupsafe
-
-if not hasattr(markupsafe, "soft_unicode"):
-    # Jinja2 2.11 imports soft_unicode, removed in MarkupSafe 2.1; soft_str is the same function
-    markupsafe.soft_unicode = markupsafe.soft_str
-
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
