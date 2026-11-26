@@ -6,5 +6,5 @@ Werkzeug==2.2.3
 click==8.1.7
 PyYAML==5.3
 requests==2.19.1
-urllib3==1.23
+urllib3==1.26.20
 pytest==6.2.5
