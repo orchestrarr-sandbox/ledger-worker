@@ -5,6 +5,6 @@ itsdangerous==1.1.0
 Werkzeug==1.0.1
 click==7.1.2
 PyYAML==5.3
-requests==2.19.1
+requests==2.34.2
 urllib3==1.23
 pytest==6.2.5
